@@ -1,0 +1,10 @@
+services:
+  fake-news-detector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fake-news-detector:latest
+    container_name: fake-news-detector
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
