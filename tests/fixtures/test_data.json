@@ -1,0 +1,16 @@
+{
+  "real_news": [
+    "The president announced new economic policies during today's press conference.",
+    "Scientists discover new species in the Amazon rainforest.",
+    "Stock market reaches new highs amid positive earnings reports."
+  ],
+  "fake_news": [
+    "Aliens have landed and are taking over the government!",
+    "Secret cure for cancer found in ancient herbal remedies!",
+    "Politician caught in massive scandal involving millions of dollars!"
+  ],
+  "mixed_news": [
+    {"text": "This is a legitimate news story about local events.", "label": 0},
+    {"text": "Outrageous conspiracy theory about secret societies controlling the world!", "label": 1}
+  ]
+}
