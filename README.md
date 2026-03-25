@@ -14,6 +14,7 @@ Detect fake vs real news articles using Machine Learning, TF-IDF, and Logistic R
 - [Evaluation & Charts](#-evaluation--charts)
 - [How It Works](#-how-it-works)
 - [Running the Streamlit App](#-running-the-streamlit-app)
+- [Testing](#-testing)
 - [Code Modules](#-code-modules)
 - [Technologies Used](#-technologies-used)
 - [License](#-license)
@@ -239,6 +240,114 @@ http://localhost:8501
 - **matplotlib** → Model visualization  
 - **joblib** → Model persistence  
 - **Streamlit** → Web interface  
+
+---
+
+## Testing
+
+本项目包含完整的测试套件，使用 **pytest** 进行单元测试、集成测试和端到端测试。
+
+### 安装测试依赖
+
+```bash
+pip install pytest pytest-cov coverage
+```
+
+或使用以下命令安装所有测试相关依赖：
+
+```bash
+pip install pytest>=7.0 pytest-cov>=4.0 coverage>=7.0
+```
+
+### 运行测试
+
+#### 运行所有测试
+```bash
+pytest
+```
+
+#### 运行特定测试文件
+```bash
+pytest tests/test_text_clean.py
+pytest tests/test_utils.py
+pytest tests/test_train_model.py
+pytest tests/test_detect_fake_news.py
+pytest tests/test_integration.py
+```
+
+#### 运行特定测试类或方法
+```bash
+pytest tests/test_text_clean.py::TestCleanText
+pytest tests/test_text_clean.py::TestCleanText::test_remove_urls
+```
+
+#### 显示详细输出
+```bash
+pytest -v
+```
+
+#### 运行并显示打印输出
+```bash
+pytest -s
+```
+
+### 覆盖率报告
+
+#### 生成控制台覆盖率报告
+```bash
+pytest --cov=src --cov-report=term
+```
+
+#### 生成 HTML 覆盖率报告
+```bash
+pytest --cov=src --cov-report=html
+```
+
+生成的 HTML 报告位于 `htmlcov/` 目录，用浏览器打开 `htmlcov/index.html` 即可查看详细的覆盖率报告。
+
+#### 生成 XML 覆盖率报告
+```bash
+pytest --cov=src --cov-report=xml
+```
+
+#### 同时生成多种报告格式
+```bash
+pytest --cov=src --cov-report=term --cov-report=html --cov-report=xml
+```
+
+### 测试结构
+
+```
+tests/
+├── conftest.py              # Pytest 配置和共享 fixtures
+├── fixtures/
+│   ├── mini_real.csv        # 小型真实新闻测试数据
+│   └── mini_fake.csv        # 小型假新闻测试数据
+├── test_text_clean.py       # 文本清洗模块单元测试
+├── test_utils.py            # I/O 工具模块单元测试
+├── test_train_model.py      # 模型训练脚本单元测试
+├── test_detect_fake_news.py # 预测接口单元测试
+└── test_integration.py      # 集成/端到端测试
+```
+
+### 测试覆盖范围
+
+| 测试文件 | 覆盖内容 |
+|----------|----------|
+| `test_text_clean.py` | 文本清洗功能：URL 移除、邮箱移除、非 ASCII 字符处理、空格折叠、空字符串处理等 |
+| `test_utils.py` | 文件 I/O：目录创建、JSON 保存/加载、异常处理 |
+| `test_train_model.py` | 模型训练：数据加载、列选择、Pipeline 构建、模型保存、指标计算 |
+| `test_detect_fake_news.py` | 预测接口：模型加载、概率预测、阈值判断、文本清洗集成 |
+| `test_integration.py` | 端到端流程：数据加载 → 训练 → 保存 → 加载 → 预测 |
+
+### 测试标记
+
+使用 pytest marker 运行特定类型的测试：
+
+```bash
+pytest -m "not slow"        # 跳过慢速测试
+pytest -m integration       # 只运行集成测试
+```
 
 ---
 
