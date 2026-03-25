@@ -14,6 +14,7 @@ Detect fake vs real news articles using Machine Learning, TF-IDF, and Logistic R
 - [Evaluation & Charts](#-evaluation--charts)
 - [How It Works](#-how-it-works)
 - [Running the Streamlit App](#-running-the-streamlit-app)
+- [Testing](#-testing)
 - [Code Modules](#-code-modules)
 - [Technologies Used](#-technologies-used)
 - [License](#-license)
@@ -72,6 +73,23 @@ fake-news-detector/
 │   ├── train_model.py           # Training and evaluation script
 │   ├── detect_fake_news.py      # CLI prediction script
 │   └── streamlit_app.py         # Streamlit web application
+│
+├── tests/
+│   ├── conftest.py              # Pytest fixtures configuration
+│   ├── pytest.ini               # Pytest configuration
+│   ├── .coveragerc              # Coverage report configuration
+│   │
+│   ├── fixtures/
+│   │   ├── sample_news.csv      # Mini test dataset
+│   │   ├── test_data.json       # Synthetic test data
+│   │   ├── train_real.csv       # Real news samples for training tests
+│   │   └── train_fake.csv       # Fake news samples for training tests
+│   │
+│   ├── test_text_clean.py       # Text cleaning unit tests
+│   ├── test_utils.py            # I/O utilities unit tests
+│   ├── test_train_model.py      # Training pipeline tests
+│   ├── test_detect_fake_news.py # Prediction interface tests
+│   └── test_integration.py      # End-to-end integration tests
 │
 └── README.md
 ```
@@ -216,6 +234,96 @@ http://localhost:8501
 - Analyze with one click  
 - Adjust FAKE probability threshold  
 - See model file locations and loaded status in sidebar  
+
+---
+
+## Testing
+
+The project includes a comprehensive test suite built with `pytest` to ensure code quality and reliability.
+
+### Install Test Dependencies
+
+```bash
+pip install pytest pytest-cov
+```
+
+Or install all dependencies including test packages:
+
+```bash
+pip install -r requirements.txt pytest pytest-cov
+```
+
+### Running Tests
+
+#### Run All Tests
+```bash
+pytest
+```
+
+#### Run Tests with Verbose Output
+```bash
+pytest -v
+```
+
+#### Run Specific Test File
+```bash
+# Run text cleaning tests
+pytest tests/test_text_clean.py -v
+
+# Run integration tests
+pytest tests/test_integration.py -v
+```
+
+#### Run Tests by Marker
+```bash
+# Run only unit tests
+pytest -m unit -v
+
+# Run only integration tests
+pytest -m integration -v
+```
+
+### Test Coverage Report
+
+#### Console Coverage Summary
+```bash
+pytest --cov=src
+```
+
+#### Detailed HTML Coverage Report
+```bash
+pytest --cov=src --cov-report=html
+```
+
+This will generate an `htmlcov/` directory with an interactive coverage report. Open `htmlcov/index.html` in your browser to view:
+- Line-by-line coverage visualization
+- Missing coverage highlights
+- Branch coverage statistics
+- Per-file coverage summaries
+
+#### Coverage with Fail Under Threshold
+```bash
+# Fail if coverage is under 80%
+pytest --cov=src --cov-fail-under=80
+```
+
+### Test Structure
+
+| Test File | Purpose | Key Features Tested |
+|-----------|---------|-------------------|
+| `test_text_clean.py` | Text preprocessing tests | Lowercasing, URL/email removal, non-ASCII removal, whitespace handling |
+| `test_utils.py` | I/O utilities tests | Directory creation, JSON save/load operations |
+| `test_train_model.py` | Training pipeline tests | Data loading, model creation, pipeline persistence |
+| `test_detect_fake_news.py` | Prediction tests | Model loading, prediction interface, threshold behavior |
+| `test_integration.py` | Integration tests | Module-level integration, cross-module interactions |
+| `test_script_integration.py` | Script-level end-to-end tests | Direct calls to `train_model.py` and `detect_fake_news.py` scripts, complete training-prediction workflow, artifact generation verification |
+
+### Fixtures
+
+Test fixtures are defined in `tests/conftest.py` and `tests/fixtures/`:
+- `sample_news.csv` - Mini dataset with balanced real/fake samples
+- `test_data.json` - Synthetic test cases and edge scenarios
+- Temporary directories and model fixtures for fast test execution
 
 ---
 

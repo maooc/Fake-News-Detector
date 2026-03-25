@@ -1,0 +1,7 @@
+title,text,subject,date,label
+"Real News Example 1","This is a real news article about politics. It contains factual information.","politics","2024-01-01",0
+"Real News Example 2","The economy shows positive growth in the latest quarter. Experts are optimistic.","business","2024-01-02",0
+"Real News Example 3","New scientific breakthrough in renewable energy announced today.","science","2024-01-03",0
+"Fake News Example 1","Shocking! Celebrity reveals secret alien encounter that government has been hiding for decades!","gossip","2024-01-01",1
+"Fake News Example 2","Miracle cure for all diseases discovered by local doctor! Big pharma doesn't want you to know!","health","2024-01-02",1
+"Fake News Example 3","New study proves that eating chocolate every day makes you lose 50 pounds in a week!","lifestyle","2024-01-03",1
