@@ -1,0 +1,52 @@
+[run]
+# Source directories to measure
+source = src
+
+# Omit files from coverage
+omit =
+    */tests/*
+    */test_*.py
+    */conftest.py
+    src/streamlit_app.py
+
+# Branch coverage
+branch = True
+
+# Parallel execution
+parallel = False
+
+[report]
+# Show missing lines
+show_missing = True
+
+# Skip empty files
+skip_empty = True
+
+# Sort report by name
+sort = Name
+
+# Coverage precision
+precision = 2
+
+# Exclude lines from coverage
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+
+# Fail under threshold
+fail_under = 70
+
+[html]
+# HTML report directory
+directory = htmlcov
+
+# HTML report title
+title = Fake News Detector Coverage Report
+
+[xml]
+# XML report output
+output = coverage.xml

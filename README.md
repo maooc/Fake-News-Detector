@@ -242,6 +242,107 @@ http://localhost:8501
 
 ---
 
+## Testing
+
+This project includes comprehensive unit and integration tests using **pytest**.
+
+### Test Structure
+
+```
+tests/
+├── conftest.py              # Shared fixtures and configuration
+├── test_text_clean.py       # Unit tests for text cleaning
+├── test_utils.py            # Unit tests for I/O utilities
+├── test_train_model.py      # Unit tests for training
+├── test_detect_fake_news.py # Unit tests for prediction
+├── test_integration.py      # End-to-end integration tests
+└── fixtures/
+    ├── mini_real_news.csv   # Sample real news for testing
+    └── mini_fake_news.csv   # Sample fake news for testing
+```
+
+### Install Test Dependencies
+
+```bash
+# Install development dependencies
+pip install -r requirements-dev.txt
+
+# Or install pytest and coverage directly
+pip install pytest pytest-cov coverage
+```
+
+### Run Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with verbose output
+pytest -v
+
+# Run specific test file
+pytest tests/test_text_clean.py
+
+# Run specific test class
+pytest tests/test_text_clean.py::TestCleanText
+
+# Run specific test method
+pytest tests/test_text_clean.py::TestCleanText::test_url_removal
+```
+
+### Run Tests with Coverage
+
+```bash
+# Run tests with coverage report (console)
+pytest --cov=src --cov-report=term-missing
+
+# Generate HTML coverage report
+pytest --cov=src --cov-report=html
+
+# Generate XML coverage report
+pytest --cov=src --cov-report=xml
+
+# View HTML report
+open htmlcov/index.html
+```
+
+### Coverage Configuration
+
+Coverage settings are defined in `.coveragerc`:
+- Source directory: `src/`
+- HTML report: `htmlcov/`
+- XML report: `coverage.xml`
+- Minimum coverage threshold: 70%
+
+### Test Markers
+
+Tests are organized with markers:
+- `unit`: Fast unit tests
+- `integration`: Slower integration tests
+- `slow`: Computationally expensive tests
+
+```bash
+# Run only unit tests
+pytest -m unit
+
+# Run all except slow tests
+pytest -m "not slow"
+
+# Run only integration tests
+pytest -m integration
+```
+
+### Test Fixtures
+
+The `tests/conftest.py` file provides reusable fixtures:
+- `sample_real_texts`: Sample real news texts
+- `sample_fake_texts`: Sample fake news texts
+- `mini_dataset`: Small synthetic dataset for training tests
+- `sample_pipeline`: Pre-trained pipeline for prediction tests
+- `temp_output_dir`: Temporary directory for test outputs
+
+---
+
 ## Future Improvements
 - Integrate **BERT / DistilBERT** for contextual language understanding  
 - Extend dataset for **multi-language** fake news detection  
