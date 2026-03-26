@@ -138,7 +138,7 @@ def main() -> None:
                     stop_words="english",
                     ngram_range=(1, 3),
                     max_df=0.8,
-                    min_df=3,
+                    min_df=2,
                     max_features=20_000,
                 ),
             ),
