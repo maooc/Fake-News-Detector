@@ -136,9 +136,9 @@ def main() -> None:
                 TfidfVectorizer(
                     sublinear_tf=True,
                     stop_words="english",
-                    ngram_range=(1, 3),
+                    ngram_range=(3, 3),
                     max_df=0.8,
-                    min_df=3,
+                    min_df=50,
                     max_features=20_000,
                 ),
             ),
